@@ -1,0 +1,17 @@
+Version 4.0 HI-TECH Software Intermediate Code
+[p mainexit ]
+[v $root$_main `(v ~T0 @X0 0 e ]
+"11 gpio.c
+[; ;gpio.c: 11: int main() {
+[v _main `(i ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"15
+[; ;gpio.c: 15:     return (0);
+[e ) -> 0 `i ]
+[e $UE 8  ]
+"16
+[; ;gpio.c: 16: }
+[e :UE 8 ]
+}
