@@ -4706,13 +4706,15 @@ STD_ReturnType gpio_pin_read_logic(const pin_config_t *_pin_config_t, logic_t *l
 STD_ReturnType gpio_pin_toggle_logic(const pin_config_t *_pin_config_t);
 
 
-STD_ReturnType gpio_port_direction_init(const port_index_t *port, uint8 direction_init);
-STD_ReturnType gpio_port_get_direction_status(const port_index_t *port, uint8 *direction_status);
-STD_ReturnType gpio_port_write_logic(const port_index_t *port, uint8 logic);
-STD_ReturnType gpio_port_read_logic(const port_index_t *port, uint8 *logic);
-STD_ReturnType gpio_port_toggle_logic(const port_index_t *port);
+STD_ReturnType gpio_port_direction_init(const port_index_t port, uint8 direction_init);
+STD_ReturnType gpio_port_get_direction_status(const port_index_t port, uint8 *direction_status);
+STD_ReturnType gpio_port_write_logic(const port_index_t port, uint8 logic);
+STD_ReturnType gpio_port_read_logic(const port_index_t port, uint8 *logic);
+STD_ReturnType gpio_port_toggle_logic(const port_index_t port);
 # 12 "./ECU_Layer/Ecu_led.h" 2
 # 12 "./Application.h" 2
+# 21 "./Application.h"
+void Application_initialize(void);
 # 8 "Application.c" 2
 
 
@@ -4786,15 +4788,8 @@ direction_t led_l_st;
 logic_t button1_status;
 
 int main() {
-    ret = gpio_pin_direction_init(&button_t);
 
-    ret = gpio_pin_direction_init(&led_1);
-    ret = gpio_pin_direction_init(&led_2);
-    ret = gpio_pin_direction_init(&led_3);
-    ret = gpio_pin_direction_init(&led_4);
-    ret = gpio_pin_direction_init(&led_5);
-    ret = gpio_pin_direction_init(&led_6);
-    ret = gpio_pin_direction_init(&led_7);
+    Application_initialize();
 
     ret = gpio_pin_direction_status(&led_1, &led_l_st);
     ret = gpio_pin_direction_status(&button_t, &led_l_st);
@@ -4831,8 +4826,19 @@ int main() {
         ret = gpio_pin_write_logic(&led_6, GPIO_LOW);
         _delay(1000);
         ret = gpio_pin_write_logic(&led_7, GPIO_LOW);
+
         _delay(1000);
     }
-
     return (0);
+}
+
+void Application_initialize(void){
+    ret = gpio_pin_direction_init(&button_t);
+    ret = gpio_pin_direction_init(&led_1);
+    ret = gpio_pin_direction_init(&led_2);
+    ret = gpio_pin_direction_init(&led_3);
+    ret = gpio_pin_direction_init(&led_4);
+    ret = gpio_pin_direction_init(&led_5);
+    ret = gpio_pin_direction_init(&led_6);
+    ret = gpio_pin_direction_init(&led_7);
 }

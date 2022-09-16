@@ -1,7 +1,7 @@
 /* 
  * File:   Application.h
  * Author: Kareem Taha
- *
+ * https://www.linkedin.com/in/kareem-taha-ba451621a/
  * Created on September 13, 2022, 10:10 PM
  */
 
@@ -19,6 +19,8 @@
 
  /* Section : Function Declaration */
 
+/* initialize any pin with direction & logic */
+void Application_initialize(void);
 
 #endif	/* APPLICATION_H */
 

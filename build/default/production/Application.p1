@@ -14,15 +14,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [c E2798 0 1 .. ]
 [n E2798 . GPIO_LOW GPIO_HIGH  ]
 [p mainexit ]
-"81 ./ECU_Layer/../MCAL_Layer/hal_gpio.h
-[; ;./ECU_Layer/../MCAL_Layer/hal_gpio.h: 81: STD_ReturnType gpio_pin_direction_init(const pin_config_t *_pin_config_t);
-[v _gpio_pin_direction_init `(uc ~T0 @X0 0 ef1`*CS272 ]
-"82
+"21 ./Application.h
+[; ;./Application.h: 21: void Application_initialize(void);
+[v _Application_initialize `(v ~T0 @X0 0 ef ]
+"82 ./ECU_Layer/../MCAL_Layer/hal_gpio.h
 [; ;./ECU_Layer/../MCAL_Layer/hal_gpio.h: 82: STD_ReturnType gpio_pin_direction_status(const pin_config_t *_pin_config_t, direction_t *direction_status);
 [v _gpio_pin_direction_status `(uc ~T0 @X0 0 ef2`*CS272`*E2802 ]
 "84
 [; ;./ECU_Layer/../MCAL_Layer/hal_gpio.h: 84: STD_ReturnType gpio_pin_read_logic(const pin_config_t *_pin_config_t, logic_t *logic);
 [v _gpio_pin_read_logic `(uc ~T0 @X0 0 ef2`*CS272`*E2798 ]
+"81
+[; ;./ECU_Layer/../MCAL_Layer/hal_gpio.h: 81: STD_ReturnType gpio_pin_direction_init(const pin_config_t *_pin_config_t);
+[v _gpio_pin_direction_init `(uc ~T0 @X0 0 ef1`*CS272 ]
 "83
 [; ;./ECU_Layer/../MCAL_Layer/hal_gpio.h: 83: STD_ReturnType gpio_pin_write_logic(const pin_config_t *_pin_config_t, logic_t logic);
 [v _gpio_pin_write_logic `(uc ~T0 @X0 0 ef2`*CS272`E2798 ]
@@ -577,151 +580,164 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _main ]
 [f ]
-"80
-[; ;Application.c: 80:     ret = gpio_pin_direction_init(&button_t);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _button_t `*CS272 ]
-"82
-[; ;Application.c: 82:     ret = gpio_pin_direction_init(&led_1);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_1 `*CS272 ]
+"81
+[; ;Application.c: 81:     Application_initialize();
+[e ( _Application_initialize ..  ]
 "83
-[; ;Application.c: 83:     ret = gpio_pin_direction_init(&led_2);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_2 `*CS272 ]
-"84
-[; ;Application.c: 84:     ret = gpio_pin_direction_init(&led_3);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_3 `*CS272 ]
-"85
-[; ;Application.c: 85:     ret = gpio_pin_direction_init(&led_4);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_4 `*CS272 ]
-"86
-[; ;Application.c: 86:     ret = gpio_pin_direction_init(&led_5);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_5 `*CS272 ]
-"87
-[; ;Application.c: 87:     ret = gpio_pin_direction_init(&led_6);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_6 `*CS272 ]
-"88
-[; ;Application.c: 88:     ret = gpio_pin_direction_init(&led_7);
-[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_7 `*CS272 ]
-"90
-[; ;Application.c: 90:     ret = gpio_pin_direction_status(&led_1, &led_l_st);
+[; ;Application.c: 83:     ret = gpio_pin_direction_status(&led_1, &led_l_st);
 [e = _ret ( _gpio_pin_direction_status (2 , -> &U _led_1 `*CS272 &U _led_l_st ]
-"91
-[; ;Application.c: 91:     ret = gpio_pin_direction_status(&button_t, &led_l_st);
+"84
+[; ;Application.c: 84:     ret = gpio_pin_direction_status(&button_t, &led_l_st);
 [e = _ret ( _gpio_pin_direction_status (2 , -> &U _button_t `*CS272 &U _led_l_st ]
-"93
-[; ;Application.c: 93:     while(1){
+"86
+[; ;Application.c: 86:     while(1){
 [e :U 275 ]
 {
-"94
-[; ;Application.c: 94:        ret = gpio_pin_read_logic(&button_t, &button1_status);
+"87
+[; ;Application.c: 87:        ret = gpio_pin_read_logic(&button_t, &button1_status);
 [e = _ret ( _gpio_pin_read_logic (2 , -> &U _button_t `*CS272 &U _button1_status ]
-"95
-[; ;Application.c: 95:        ret = gpio_pin_direction_init(&led_8);
+"88
+[; ;Application.c: 88:        ret = gpio_pin_direction_init(&led_8);
 [e = _ret ( _gpio_pin_direction_init (1 -> &U _led_8 `*CS272 ]
-"96
-[; ;Application.c: 96:        if(button1_status == GPIO_HIGH) ret = gpio_pin_write_logic(&led_8, GPIO_HIGH);
+"89
+[; ;Application.c: 89:        if(button1_status == GPIO_HIGH) ret = gpio_pin_write_logic(&led_8, GPIO_HIGH);
 [e $ ! == -> _button1_status `ui -> . `E2798 1 `ui 277  ]
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_8 `*CS272 . `E2798 1 ]
 [e $U 278  ]
-"97
-[; ;Application.c: 97:        else ret = gpio_pin_write_logic(&led_8, GPIO_LOW);
+"90
+[; ;Application.c: 90:        else ret = gpio_pin_write_logic(&led_8, GPIO_LOW);
 [e :U 277 ]
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_8 `*CS272 . `E2798 0 ]
 [e :U 278 ]
-"98
-[; ;Application.c: 98:         ret = gpio_pin_write_logic(&led_1, GPIO_HIGH);
+"91
+[; ;Application.c: 91:         ret = gpio_pin_write_logic(&led_1, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_1 `*CS272 . `E2798 1 ]
-"99
-[; ;Application.c: 99:         _delay(1000);
+"92
+[; ;Application.c: 92:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"100
-[; ;Application.c: 100:         ret = gpio_pin_write_logic(&led_2, GPIO_HIGH);
+"93
+[; ;Application.c: 93:         ret = gpio_pin_write_logic(&led_2, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_2 `*CS272 . `E2798 1 ]
-"101
-[; ;Application.c: 101:         _delay(1000);
+"94
+[; ;Application.c: 94:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"102
-[; ;Application.c: 102:         ret = gpio_pin_write_logic(&led_3, GPIO_HIGH);
+"95
+[; ;Application.c: 95:         ret = gpio_pin_write_logic(&led_3, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_3 `*CS272 . `E2798 1 ]
-"103
-[; ;Application.c: 103:         _delay(1000);
+"96
+[; ;Application.c: 96:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"104
-[; ;Application.c: 104:         ret = gpio_pin_write_logic(&led_4, GPIO_HIGH);
+"97
+[; ;Application.c: 97:         ret = gpio_pin_write_logic(&led_4, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_4 `*CS272 . `E2798 1 ]
-"105
-[; ;Application.c: 105:         _delay(1000);
+"98
+[; ;Application.c: 98:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"106
-[; ;Application.c: 106:         ret = gpio_pin_write_logic(&led_5, GPIO_HIGH);
+"99
+[; ;Application.c: 99:         ret = gpio_pin_write_logic(&led_5, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_5 `*CS272 . `E2798 1 ]
-"107
-[; ;Application.c: 107:         _delay(1000);
+"100
+[; ;Application.c: 100:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"108
-[; ;Application.c: 108:         ret = gpio_pin_write_logic(&led_6, GPIO_HIGH);
+"101
+[; ;Application.c: 101:         ret = gpio_pin_write_logic(&led_6, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_6 `*CS272 . `E2798 1 ]
-"109
-[; ;Application.c: 109:         _delay(1000);
+"102
+[; ;Application.c: 102:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"110
-[; ;Application.c: 110:         ret = gpio_pin_write_logic(&led_7, GPIO_HIGH);
+"103
+[; ;Application.c: 103:         ret = gpio_pin_write_logic(&led_7, GPIO_HIGH);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_7 `*CS272 . `E2798 1 ]
-"111
-[; ;Application.c: 111:         _delay(1000);
+"104
+[; ;Application.c: 104:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"112
-[; ;Application.c: 112:         ret = gpio_pin_write_logic(&led_1, GPIO_LOW);
+"105
+[; ;Application.c: 105:         ret = gpio_pin_write_logic(&led_1, GPIO_LOW);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_1 `*CS272 . `E2798 0 ]
-"113
-[; ;Application.c: 113:         _delay(1000);
+"106
+[; ;Application.c: 106:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"114
-[; ;Application.c: 114:         ret = gpio_pin_write_logic(&led_2, GPIO_LOW);
+"107
+[; ;Application.c: 107:         ret = gpio_pin_write_logic(&led_2, GPIO_LOW);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_2 `*CS272 . `E2798 0 ]
-"115
-[; ;Application.c: 115:         _delay(1000);
+"108
+[; ;Application.c: 108:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"116
-[; ;Application.c: 116:         ret = gpio_pin_write_logic(&led_3, GPIO_LOW);
+"109
+[; ;Application.c: 109:         ret = gpio_pin_write_logic(&led_3, GPIO_LOW);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_3 `*CS272 . `E2798 0 ]
-"117
-[; ;Application.c: 117:         _delay(1000);
+"110
+[; ;Application.c: 110:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"118
-[; ;Application.c: 118:         ret = gpio_pin_write_logic(&led_4, GPIO_LOW);
+"111
+[; ;Application.c: 111:         ret = gpio_pin_write_logic(&led_4, GPIO_LOW);
 [e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_4 `*CS272 . `E2798 0 ]
+"112
+[; ;Application.c: 112:         _delay(1000);
+[e ( __delay (1 -> -> -> 1000 `i `l `ul ]
+"113
+[; ;Application.c: 113:         ret = gpio_pin_write_logic(&led_5, GPIO_LOW);
+[e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_5 `*CS272 . `E2798 0 ]
+"114
+[; ;Application.c: 114:         _delay(1000);
+[e ( __delay (1 -> -> -> 1000 `i `l `ul ]
+"115
+[; ;Application.c: 115:         ret = gpio_pin_write_logic(&led_6, GPIO_LOW);
+[e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_6 `*CS272 . `E2798 0 ]
+"116
+[; ;Application.c: 116:         _delay(1000);
+[e ( __delay (1 -> -> -> 1000 `i `l `ul ]
+"117
+[; ;Application.c: 117:         ret = gpio_pin_write_logic(&led_7, GPIO_LOW);
+[e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_7 `*CS272 . `E2798 0 ]
 "119
 [; ;Application.c: 119:         _delay(1000);
 [e ( __delay (1 -> -> -> 1000 `i `l `ul ]
 "120
-[; ;Application.c: 120:         ret = gpio_pin_write_logic(&led_5, GPIO_LOW);
-[e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_5 `*CS272 . `E2798 0 ]
-"121
-[; ;Application.c: 121:         _delay(1000);
-[e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"122
-[; ;Application.c: 122:         ret = gpio_pin_write_logic(&led_6, GPIO_LOW);
-[e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_6 `*CS272 . `E2798 0 ]
-"123
-[; ;Application.c: 123:         _delay(1000);
-[e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"124
-[; ;Application.c: 124:         ret = gpio_pin_write_logic(&led_7, GPIO_LOW);
-[e = _ret ( _gpio_pin_write_logic (2 , -> &U _led_7 `*CS272 . `E2798 0 ]
-"125
-[; ;Application.c: 125:         _delay(1000);
-[e ( __delay (1 -> -> -> 1000 `i `l `ul ]
-"126
-[; ;Application.c: 126:     }
+[; ;Application.c: 120:     }
 }
 [e :U 274 ]
 [e $U 275  ]
 [e :U 276 ]
-"128
-[; ;Application.c: 128:     return (0);
+"121
+[; ;Application.c: 121:     return (0);
 [e ) -> 0 `i ]
 [e $UE 273  ]
-"129
-[; ;Application.c: 129: }
+"122
+[; ;Application.c: 122: }
 [e :UE 273 ]
+}
+"124
+[; ;Application.c: 124: void Application_initialize(void){
+[v _Application_initialize `(v ~T0 @X0 1 ef ]
+{
+[e :U _Application_initialize ]
+[f ]
+"125
+[; ;Application.c: 125:     ret = gpio_pin_direction_init(&button_t);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _button_t `*CS272 ]
+"126
+[; ;Application.c: 126:     ret = gpio_pin_direction_init(&led_1);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_1 `*CS272 ]
+"127
+[; ;Application.c: 127:     ret = gpio_pin_direction_init(&led_2);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_2 `*CS272 ]
+"128
+[; ;Application.c: 128:     ret = gpio_pin_direction_init(&led_3);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_3 `*CS272 ]
+"129
+[; ;Application.c: 129:     ret = gpio_pin_direction_init(&led_4);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_4 `*CS272 ]
+"130
+[; ;Application.c: 130:     ret = gpio_pin_direction_init(&led_5);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_5 `*CS272 ]
+"131
+[; ;Application.c: 131:     ret = gpio_pin_direction_init(&led_6);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_6 `*CS272 ]
+"132
+[; ;Application.c: 132:     ret = gpio_pin_direction_init(&led_7);
+[e = _ret ( _gpio_pin_direction_init (1 -> &U _led_7 `*CS272 ]
+"133
+[; ;Application.c: 133: }
+[e :UE 279 ]
 }

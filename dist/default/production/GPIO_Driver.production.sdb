@@ -13,7 +13,7 @@ GPIO_INPUT_DIRECTION 1
 GPIO_LOW 0
 GPIO_HIGH 1
 ]
-"89
+"88
 [e E2816 . `uc
 PORTA_INDEX 0
 PORTB_INDEX 1
@@ -49,6 +49,8 @@ GPIO_HIGH 1
 ]
 "79
 [v _main main `(i  1 e 2 0 ]
+"124
+[v _Application_initialize Application_initialize `(v  1 e 1 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\fleq.c
 [v ___fleq __fleq `(b  1 e 0 0 ]
 "62 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\float.c
@@ -149,7 +151,7 @@ GPIO_HIGH 1
 "79 D:\Embedded System\GPIO Driver\Application.c
 [v _main main `(i  1 e 2 0 ]
 {
-"129
+"122
 } 0
 "46 D:\Embedded System\GPIO Driver\MCAL_Layer/hal_gpio.c
 [v _gpio_pin_write_logic gpio_pin_write_logic `(uc  1 e 1 0 ]
@@ -196,7 +198,12 @@ GPIO_HIGH 1
 [v gpio_pin_direction_status@direction_status direction_status `*.39E2802  1 p 2 2 ]
 "42
 } 0
-"16
+"124 D:\Embedded System\GPIO Driver\Application.c
+[v _Application_initialize Application_initialize `(v  1 e 1 0 ]
+{
+"133
+} 0
+"16 D:\Embedded System\GPIO Driver\MCAL_Layer/hal_gpio.c
 [v _gpio_pin_direction_init gpio_pin_direction_init `(uc  1 e 1 0 ]
 {
 "17

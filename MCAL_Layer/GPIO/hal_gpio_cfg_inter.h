@@ -1,7 +1,7 @@
 /* 
  * File:   hal_gpio_cfg_inter.h
  * Author: Kareem Taha
- *
+ * https://www.linkedin.com/in/kareem-taha-ba451621a/
  * Created on September 15, 2022, 9:13 PM
  */
 

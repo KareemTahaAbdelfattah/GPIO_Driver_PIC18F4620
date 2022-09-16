@@ -1,12 +1,13 @@
 /* 
  * File:   Application.c
  * Author: Kareem Taha Abdelfatah Mohammed
- *
+ * https://www.linkedin.com/in/kareem-taha-ba451621a/
  * Created on September 13, 2022, 9:10 PM
  */
 
 #include "Application.h"
 
+/* object of pin0 at portC */
 pin_config_t led_1 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN0,
@@ -14,7 +15,7 @@ pin_config_t led_1 = {
     .logic = GPIO_LOW    
 };
 
-
+/* object of pin1 at portC */
 pin_config_t led_2 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN1,
@@ -22,7 +23,7 @@ pin_config_t led_2 = {
     .logic = GPIO_LOW   
 };
 
-
+/* object of pin2 at portC */
 pin_config_t led_3 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN2,
@@ -30,6 +31,7 @@ pin_config_t led_3 = {
     .logic = GPIO_LOW   
 };
 
+/* object of pin3 at portC */
 pin_config_t led_4 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN3,
@@ -37,6 +39,7 @@ pin_config_t led_4 = {
     .logic = GPIO_LOW   
 };
 
+/* object of pin4 at portC */
 pin_config_t led_5 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN4,
@@ -44,6 +47,7 @@ pin_config_t led_5 = {
     .logic = GPIO_LOW   
 };
 
+/* object of pin5 at portC */
 pin_config_t led_6 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN5,
@@ -51,6 +55,7 @@ pin_config_t led_6 = {
     .logic = GPIO_LOW   
 };
 
+/* object of pin6 at portC */
 pin_config_t led_7 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN6,
@@ -58,6 +63,7 @@ pin_config_t led_7 = {
     .logic = GPIO_LOW   
 };
 
+/* object of button at portD */
 pin_config_t button_t = {
     .port = PORTD_INDEX,
     .pin = GPIO_PIN0,
@@ -65,6 +71,7 @@ pin_config_t button_t = {
     .logic = GPIO_HIGH    
 };
 
+/* object of pin7 */
 pin_config_t led_8 = {
     .port = PORTC_INDEX,
     .pin = GPIO_PIN7,
@@ -77,15 +84,8 @@ direction_t led_l_st;
 logic_t button1_status;
 
 int main() {
-    ret = gpio_pin_direction_init(&button_t);
     
-    ret = gpio_pin_direction_init(&led_1);
-    ret = gpio_pin_direction_init(&led_2);
-    ret = gpio_pin_direction_init(&led_3);
-    ret = gpio_pin_direction_init(&led_4);
-    ret = gpio_pin_direction_init(&led_5);
-    ret = gpio_pin_direction_init(&led_6);
-    ret = gpio_pin_direction_init(&led_7);
+    Application_initialize();
     
     ret = gpio_pin_direction_status(&led_1, &led_l_st);
     ret = gpio_pin_direction_status(&button_t, &led_l_st);
@@ -122,9 +122,20 @@ int main() {
         ret = gpio_pin_write_logic(&led_6, GPIO_LOW);
         _delay(1000);
         ret = gpio_pin_write_logic(&led_7, GPIO_LOW);
+        //gpio_pin_toggle_logic(&led_1);
         _delay(1000);
     }
-    
     return (EXIT_SUCCESS);
 }
 
+/* initialize any pin with direction & logic */
+void Application_initialize(void){
+    ret = gpio_pin_direction_init(&button_t);
+    ret = gpio_pin_direction_init(&led_1);
+    ret = gpio_pin_direction_init(&led_2);
+    ret = gpio_pin_direction_init(&led_3);
+    ret = gpio_pin_direction_init(&led_4);
+    ret = gpio_pin_direction_init(&led_5);
+    ret = gpio_pin_direction_init(&led_6);
+    ret = gpio_pin_direction_init(&led_7);
+}
