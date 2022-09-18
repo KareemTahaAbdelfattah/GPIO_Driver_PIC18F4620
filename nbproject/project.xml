@@ -13,8 +13,7 @@
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>MCAL_Layer</sourceRootElem>
-                <sourceRootElem>ECU_Layer</sourceRootElem>
+                <sourceRootElem/>
             </sourceRootList>
             <confList>
                 <confElem>

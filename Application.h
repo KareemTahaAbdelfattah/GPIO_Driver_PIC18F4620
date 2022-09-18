@@ -11,8 +11,11 @@
  /* Section : Includes */
 #include "ECU_Layer/Ecu_led.h"
 #include "ECU_Layer/ecu_button.h"
+#include "ECU_Layer/RELAY/ecu_relay.h"
 
  /* Section : Macros Definition */
+
+#define _XTAL_FREQ       8000000UL
 
  /* Section : Macros Functions Declaration */
 

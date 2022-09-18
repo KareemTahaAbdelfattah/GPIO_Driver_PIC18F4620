@@ -1,3 +1,12 @@
+# 1 "dist/default/production/doprnt.i"
+# 1 "<built-in>" 1
+# 1 "<built-in>" 3
+# 288 "<built-in>" 3
+# 1 "<command line>" 1
+# 1 "<built-in>" 2
+# 1 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\language_support.h" 1 3
+# 2 "<built-in>" 2
+# 1 "dist/default/production/doprnt.i" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
@@ -847,7 +856,7 @@ static void pad(FILE *fp, char *buf, int p)
 {
     int i, w;
 # 145 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
-    w = (p < 0) ? 0 : p;
+ w = (p < 0) ? 0 : p;
     i = 0;
     while (i < w) {
         fputc(' ', fp);
@@ -866,6 +875,60 @@ static void pad(FILE *fp, char *buf, int p)
 
 
 
+}
+# 443 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
+static void dtoa(FILE *fp, long long d)
+{
+ char s;
+    int i, p, w;
+    long long n;
+
+
+    n = d;
+    s = n < 0 ? 1 : 0;
+    if (s) {
+        n = -n;
+    }
+
+
+
+
+
+
+
+    p = (0 < prec) ? prec : 1;
+    w = width;
+    if (s
+
+
+
+    ) {
+        --w;
+  s = s ? '-' : '+';
+    }
+# 480 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
+ i = sizeof(dbuf) - 1;
+    dbuf[i] = '\0';
+    while (!(i < 1) && (n || (0 < p)
+
+
+
+    )) {
+        --i;
+        dbuf[i] = (char)((int)'0' + abs(n % 10));
+        --p;
+        --w;
+        n = n / 10;
+    }
+
+
+    if (s != 0) {
+        --i;
+        dbuf[i] = s;
+    }
+
+
+    return (void) pad(fp, &dbuf[i], w);
 }
 # 1006 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
 static void
@@ -886,8 +949,18 @@ vfpfcnvrt(FILE *fp, char *fmt[], va_list ap)
 
         flags = width = 0;
         prec = -1;
+# 1117 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
+ cp = *fmt;
+# 1187 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
+ if (*cp == 'd' || *cp == 'i') {
+# 1230 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
+ convarg.ll = (long long)(int)(*(int *)__va_arg(*(int **)ap, (int)0));
+
+   *fmt = cp+1;
+   return (void) dtoa(fp, convarg.ll);
+  }
 # 1509 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\sources\\c99\\common\\doprnt.c"
-        ++*fmt;
+ ++*fmt;
         return (void) 0;
     }
 
