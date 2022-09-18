@@ -7,135 +7,107 @@
 
 #include "Application.h"
 
-/* object of pin0 at portC */
-pin_config_t led_1 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN0,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW    
-};
-
-/* object of pin1 at portC */
-pin_config_t led_2 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN1,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
-/* object of pin2 at portC */
-pin_config_t led_3 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN2,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
-/* object of pin3 at portC */
-pin_config_t led_4 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN3,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
-/* object of pin4 at portC */
-pin_config_t led_5 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN4,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
-/* object of pin5 at portC */
-pin_config_t led_6 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN5,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
-/* object of pin6 at portC */
-pin_config_t led_7 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN6,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
-/* object of button at portD */
-pin_config_t button_t = {
-    .port = PORTD_INDEX,
-    .pin = GPIO_PIN0,
-    .direction = GPIO_INPUT_DIRECTION,
-    .logic = GPIO_HIGH    
-};
-
-/* object of pin7 */
-pin_config_t led_8 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN7,
-    .direction = GPIO_OUTPUT_DIRECTION,
-    .logic = GPIO_LOW   
-};
-
 STD_ReturnType ret = E_OK;
-direction_t led_l_st;
-logic_t button1_status;
 
-int main() {
-    
+button_t btn_1 = {
+    .button_pin.port = PORTC_INDEX,
+    .button_pin.pin = GPIO_PIN2,
+    .button_pin.direction = GPIO_INPUT_DIRECTION,
+    .button_pin.logic = GPIO_LOW,
+    .button_connection = BUTTON_ACTIVE_HIGH,
+    .button_state = BUTTON_RELEASED
+};
+
+
+led_t led_1 = {
+    .port_name = PORTC_INDEX,
+    .pin_number = GPIO_PIN0,
+    .led_status = LED_LOW      
+};
+led_t led_2 = {
+    .port_name = PORTC_INDEX,
+    .pin_number = GPIO_PIN1,
+    .led_status = LED_LOW      
+};
+
+button_state_t btn_high_status = BUTTON_RELEASED;
+button_state_t btn_high_valid_status = BUTTON_RELEASED;
+button_state_t btn_high_last_valid_status = BUTTON_RELEASED;
+
+
+uint32 btn_high_valid = 0;
+uint8 Program_Selected = 0;
+
+void program_1(void){
+    led_turn_on(&led_1);
+    _delay(1000);
+    led_turn_off(&led_1);
+    _delay(1000);
+}
+
+void program_2(void){
+    uint8 counter = 0;
+    for(counter = 0; counter < 2; counter ++){
+        led_turn_on(&led_1);
+        _delay(1000);
+        led_turn_off(&led_1);
+        _delay(1000);
+    }
+}
+
+void program_3(void){
+    uint8 counter = 0;
+    for(counter = 0; counter < 3; counter ++){
+        led_turn_on(&led_1);
+        _delay(1000);
+        led_turn_off(&led_1);
+        _delay(1000);
+    }
+}
+int main() { 
     Application_initialize();
-    
-    ret = gpio_pin_direction_status(&led_1, &led_l_st);
-    ret = gpio_pin_direction_status(&button_t, &led_l_st);
-    
+
     while(1){
-       ret = gpio_pin_read_logic(&button_t, &button1_status);
-       ret = gpio_pin_direction_init(&led_8);
-       if(button1_status == GPIO_HIGH) ret = gpio_pin_write_logic(&led_8, GPIO_HIGH);
-       else ret = gpio_pin_write_logic(&led_8, GPIO_LOW);
-        ret = gpio_pin_write_logic(&led_1, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_2, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_3, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_4, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_5, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_6, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_7, GPIO_HIGH);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_1, GPIO_LOW);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_2, GPIO_LOW);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_3, GPIO_LOW);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_4, GPIO_LOW);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_5, GPIO_LOW);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_6, GPIO_LOW);
-        _delay(1000);
-        ret = gpio_pin_write_logic(&led_7, GPIO_LOW);
-        //gpio_pin_toggle_logic(&led_1);
-        _delay(1000);
+        
+        ret = button_read_state(&btn_1, &btn_high_status);
+        
+        if(BUTTON_PRESSED == btn_high_status){
+            btn_high_valid++;
+            if(btn_high_valid > 500){
+                btn_high_valid_status = BUTTON_PRESSED;
+            }
+        }
+        else{
+            btn_high_valid = 0;
+            btn_high_valid_status = BUTTON_RELEASED;
+        }
+        
+        if(btn_high_valid_status != btn_high_last_valid_status){
+            btn_high_last_valid_status = btn_high_valid_status;
+            if(BUTTON_PRESSED == btn_high_valid_status){
+                if(3 == Program_Selected){
+                    Program_Selected = 0;
+                }
+                
+                Program_Selected++;
+                switch(Program_Selected){
+                    case 1 : program_1(); break;
+                    case 2 : program_2(); break;
+                    case 3 : program_3(); break;
+                    default : break; /* Nothing */
+                }
+            }
+        }
+
+        
+        
     }
     return (EXIT_SUCCESS);
 }
 
 /* initialize any pin with direction & logic */
 void Application_initialize(void){
-    ret = gpio_pin_direction_init(&button_t);
-    ret = gpio_pin_direction_init(&led_1);
-    ret = gpio_pin_direction_init(&led_2);
-    ret = gpio_pin_direction_init(&led_3);
-    ret = gpio_pin_direction_init(&led_4);
-    ret = gpio_pin_direction_init(&led_5);
-    ret = gpio_pin_direction_init(&led_6);
-    ret = gpio_pin_direction_init(&led_7);
+    ret = led_initialize(&led_1);
+    ret = led_initialize(&led_2);
+    ret = button_initialize(&btn_1);
 }

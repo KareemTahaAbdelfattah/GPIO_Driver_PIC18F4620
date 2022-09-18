@@ -23,7 +23,7 @@ volatile uint8 *port_register[] = {&PORTA, &PORTB, &PORTC, &PORTD, &PORTE};
 */
 STD_ReturnType gpio_pin_direction_init(const pin_config_t *_pin_config_t){
     STD_ReturnType ret = E_OK;
-    if(_pin_config_t == NULL || (_pin_config_t->port > MAX_PORT_NUM - 1) || (_pin_config_t->pin > MAX_PIN_NUM - 1)) ret = E_NOT_OK;
+    if(_pin_config_t == NULL || (_pin_config_t->port > (MAX_PORT_NUM - 1)) || (_pin_config_t->pin > (MAX_PIN_NUM - 1))) ret = E_NOT_OK;
     else{
         switch(_pin_config_t->direction){
             case GPIO_OUTPUT_DIRECTION:
@@ -176,7 +176,7 @@ STD_ReturnType gpio_port_write_logic(const port_index_t port, uint8 logic){
                 *lat_register[port] = GPIO_HIGH;
                 break;
             case GPIO_LOW:
-                *lat_register[port] = GPIO_HIGH;
+                *lat_register[port] = GPIO_LOW;
                 break;
             default: ret = E_NOT_OK;
         }
@@ -198,7 +198,7 @@ STD_ReturnType gpio_port_read_logic(const port_index_t port, uint8 *logic){
     STD_ReturnType ret = E_OK;
     if((port > MAX_PORT_NUM - 1) || logic == NULL) ret = E_NOT_OK;
     else{
-        logic = *lat_register[port];
+        *logic = *lat_register[port];
     }
     return ret; 
 }

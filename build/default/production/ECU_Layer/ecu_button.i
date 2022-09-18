@@ -1,4 +1,4 @@
-# 1 "MCAL_Layer/hal_gpio.c"
+# 1 "ECU_Layer/ecu_button.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "MCAL_Layer/hal_gpio.c" 2
+# 1 "ECU_Layer/ecu_button.c" 2
 
 
 
@@ -14,12 +14,14 @@
 
 
 
-# 1 "MCAL_Layer/hal_gpio.h" 1
-# 12 "MCAL_Layer/hal_gpio.h"
-# 1 "MCAL_Layer/std_types.h" 1
-# 13 "MCAL_Layer/std_types.h"
-# 1 "MCAL_Layer/std_libraries.h" 1
-# 13 "MCAL_Layer/std_libraries.h"
+# 1 "ECU_Layer/ecu_button.h" 1
+# 12 "ECU_Layer/ecu_button.h"
+# 1 "ECU_Layer/../MCAL_Layer/hal_gpio.h" 1
+# 12 "ECU_Layer/../MCAL_Layer/hal_gpio.h"
+# 1 "ECU_Layer/../MCAL_Layer/std_types.h" 1
+# 13 "ECU_Layer/../MCAL_Layer/std_types.h"
+# 1 "ECU_Layer/../MCAL_Layer/std_libraries.h" 1
+# 13 "ECU_Layer/../MCAL_Layer/std_libraries.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdio.h" 1 3
 
 
@@ -183,7 +185,7 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 13 "MCAL_Layer/std_libraries.h" 2
+# 13 "ECU_Layer/../MCAL_Layer/std_libraries.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdlib.h" 1 3
 # 21 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\stdlib.h" 3
@@ -248,7 +250,7 @@ typedef struct { unsigned int quot, rem; } udiv_t;
 typedef struct { unsigned long quot, rem; } uldiv_t;
 udiv_t udiv (unsigned int, unsigned int);
 uldiv_t uldiv (unsigned long, unsigned long);
-# 14 "MCAL_Layer/std_libraries.h" 2
+# 14 "ECU_Layer/../MCAL_Layer/std_libraries.h" 2
 
 # 1 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\xc.h" 3
@@ -4625,11 +4627,11 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\xc.h" 2 3
-# 15 "MCAL_Layer/std_libraries.h" 2
-# 13 "MCAL_Layer/std_types.h" 2
+# 15 "ECU_Layer/../MCAL_Layer/std_libraries.h" 2
+# 13 "ECU_Layer/../MCAL_Layer/std_types.h" 2
 
-# 1 "MCAL_Layer/compiler.h" 1
-# 14 "MCAL_Layer/std_types.h" 2
+# 1 "ECU_Layer/../MCAL_Layer/compiler.h" 1
+# 14 "ECU_Layer/../MCAL_Layer/std_types.h" 2
 
 
 
@@ -4644,15 +4646,15 @@ typedef signed short sint16;
 typedef signed int sint32;
 
 typedef uint8 STD_ReturnType;
-# 12 "MCAL_Layer/hal_gpio.h" 2
+# 12 "ECU_Layer/../MCAL_Layer/hal_gpio.h" 2
 
 
-# 1 "MCAL_Layer/device_config.h" 1
-# 14 "MCAL_Layer/hal_gpio.h" 2
+# 1 "ECU_Layer/../MCAL_Layer/device_config.h" 1
+# 14 "ECU_Layer/../MCAL_Layer/hal_gpio.h" 2
 
-# 1 "MCAL_Layer/GPIO/hal_gpio_cfg_inter.h" 1
-# 15 "MCAL_Layer/hal_gpio.h" 2
-# 41 "MCAL_Layer/hal_gpio.h"
+# 1 "ECU_Layer/../MCAL_Layer/GPIO/hal_gpio_cfg_inter.h" 1
+# 15 "ECU_Layer/../MCAL_Layer/hal_gpio.h" 2
+# 41 "ECU_Layer/../MCAL_Layer/hal_gpio.h"
 typedef enum{
     GPIO_LOW = 0,
     GPIO_HIGH
@@ -4693,7 +4695,7 @@ typedef struct{
     uint8 direction : 1;
     uint8 logic : 1;
 }pin_config_t;
-# 90 "MCAL_Layer/hal_gpio.h"
+# 90 "ECU_Layer/../MCAL_Layer/hal_gpio.h"
 STD_ReturnType gpio_pin_direction_init(const pin_config_t *_pin_config_t);
 
 
@@ -4758,125 +4760,73 @@ STD_ReturnType gpio_port_read_logic(const port_index_t port, uint8 *logic);
 
 
 STD_ReturnType gpio_port_toggle_logic(const port_index_t port);
-# 8 "MCAL_Layer/hal_gpio.c" 2
+# 12 "ECU_Layer/ecu_button.h" 2
+
+# 1 "ECU_Layer/ecu_button_cfg.h" 1
+# 13 "ECU_Layer/ecu_button.h" 2
 
 
 
 
-volatile uint8 *tris_register[] = {&TRISA, &TRISB, &TRISC, &TRISD, &TRISE};
-volatile uint8 *lat_register[] = {&LATA, &LATB, &LATC, &LATD, &LATE};
-volatile uint8 *port_register[] = {&PORTA, &PORTB, &PORTC, &PORTD, &PORTE};
-# 24 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_pin_direction_init(const pin_config_t *_pin_config_t){
+
+
+
+typedef enum{
+    BUTTON_PRESSED = 0,
+    BUTTON_RELEASED
+}button_state_t;
+
+typedef enum{
+    BUTTON_ACTIVE_HIGH,
+    BUTTON_ACTIVE_LOW
+}button_active_t;
+
+typedef struct{
+    pin_config_t button_pin;
+    button_state_t button_state;
+    button_active_t button_connection;
+}button_t;
+# 44 "ECU_Layer/ecu_button.h"
+STD_ReturnType button_initialize(const button_t *btn);
+# 54 "ECU_Layer/ecu_button.h"
+STD_ReturnType button_read_state(const button_t *btn, button_state_t *btn_state);
+# 8 "ECU_Layer/ecu_button.c" 2
+# 17 "ECU_Layer/ecu_button.c"
+STD_ReturnType button_initialize(const button_t *btn){
     STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(_pin_config_t == ((void*)0) || (_pin_config_t->port > (5 - 1)) || (_pin_config_t->pin > (8 - 1))) ret = (STD_ReturnType)0x00;
+    if(((void*)0) == btn){
+        ret = (STD_ReturnType)0x00;
+    }
     else{
-        switch(_pin_config_t->direction){
-            case GPIO_OUTPUT_DIRECTION:
-                (*tris_register[_pin_config_t->port] &= ~(1 << _pin_config_t->pin));
-                break;
-            case GPIO_INPUT_DIRECTION:
-                (*tris_register[_pin_config_t->port] |= (1 << _pin_config_t->pin));
-                break;
-            default: ret = (STD_ReturnType)0x00;
+        ret = gpio_pin_direction_init(&(btn->button_pin));
+    }
+    return ret;
+}
+# 36 "ECU_Layer/ecu_button.c"
+STD_ReturnType button_read_state(const button_t *btn, button_state_t *btn_state){
+    STD_ReturnType ret = (STD_ReturnType)0x00;
+    logic_t Pin_Logic_Status = GPIO_LOW;
+    if((((void*)0) == btn) || (((void*)0) == btn_state)){
+        ret = (STD_ReturnType)0x00;
+    }
+    else{
+        gpio_pin_read_logic(&(btn->button_pin), &Pin_Logic_Status);
+        if(BUTTON_ACTIVE_HIGH == btn->button_connection){
+            if(GPIO_HIGH == Pin_Logic_Status){
+                *btn_state = BUTTON_PRESSED;
+            }
+            else{
+                *btn_state = BUTTON_RELEASED;
+            }
         }
-    }
-    return ret;
-}
-# 51 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_pin_direction_status(const pin_config_t *_pin_config_t, direction_t *direction_status){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(_pin_config_t == ((void*)0) || direction_status == ((void*)0) || (_pin_config_t->port > 5 - 1) || (_pin_config_t->pin > 8 - 1)) ret = (STD_ReturnType)0x00;
-    else{
-       *direction_status = ((*tris_register[_pin_config_t->port] >> _pin_config_t->pin) & 1);
-    }
-    return ret;
-}
-# 70 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_pin_write_logic(const pin_config_t *_pin_config_t, logic_t logic){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(_pin_config_t == ((void*)0) || (_pin_config_t->port > 5 - 1) || (_pin_config_t->pin > 8 - 1)) ret = (STD_ReturnType)0x00;
-    else{
-        switch(logic){
-            case GPIO_LOW:
-                (*lat_register[_pin_config_t->port] &= ~(1 << _pin_config_t->pin));
-                break;
-            case GPIO_HIGH:
-                (*lat_register[_pin_config_t->port] |= (1 << _pin_config_t->pin));
-                break;
-            default: ret = (STD_ReturnType)0x00;
+        else if(BUTTON_ACTIVE_LOW == btn->button_connection){
+            if(GPIO_HIGH == Pin_Logic_Status){
+                *btn_state = BUTTON_RELEASED;
+            }
+            else{
+                *btn_state = BUTTON_PRESSED;
+            }
         }
-    }
-    return ret;
-}
-# 96 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_pin_read_logic(const pin_config_t *_pin_config_t, logic_t *logic){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(_pin_config_t == ((void*)0) || logic == ((void*)0) || (_pin_config_t->port > 5 - 1) || (_pin_config_t->pin > 8 - 1)) ret = (STD_ReturnType)0x00;
-    else{
-        *logic = ((*port_register[_pin_config_t->port] >> _pin_config_t->pin) & 1);
-    }
-    return ret;
-}
-# 114 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_pin_toggle_logic(const pin_config_t *_pin_config_t){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(_pin_config_t == ((void*)0) || (_pin_config_t->port > 5 - 1) || (_pin_config_t->pin > 8 - 1)) ret = (STD_ReturnType)0x00;
-    else{
-        (*lat_register[_pin_config_t->port] ^= (1 << _pin_config_t->pin));
-    }
-    return ret;
-}
-# 133 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_port_direction_init(const port_index_t port, uint8 direction_init){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(port > 5 - 1) ret = (STD_ReturnType)0x00;
-    else{
-        *tris_register[port] = direction_init;
-    }
-    return ret;
-}
-# 151 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_port_get_direction_status(const port_index_t port, uint8 *direction_status){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(direction_status == ((void*)0) || (port > 5 - 1)) ret = (STD_ReturnType)0x00;
-    else{
-       *direction_status = *tris_register[port];
-    }
-    return ret;
-}
-# 170 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_port_write_logic(const port_index_t port, uint8 logic){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(port > 5 - 1) ret = (STD_ReturnType)0x00;
-    else{
-        switch(logic){
-            case GPIO_HIGH:
-                *lat_register[port] = GPIO_HIGH;
-                break;
-            case GPIO_LOW:
-                *lat_register[port] = GPIO_LOW;
-                break;
-            default: ret = (STD_ReturnType)0x00;
-        }
-    }
-    return ret;
-}
-# 197 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_port_read_logic(const port_index_t port, uint8 *logic){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if((port > 5 - 1) || logic == ((void*)0)) ret = (STD_ReturnType)0x00;
-    else{
-        *logic = *lat_register[port];
-    }
-    return ret;
-}
-# 215 "MCAL_Layer/hal_gpio.c"
-STD_ReturnType gpio_port_toggle_logic(const port_index_t port){
-    STD_ReturnType ret = (STD_ReturnType)0x01;
-    if(port > 5 - 1) ret = (STD_ReturnType)0x00;
-    else{
-        *lat_register[port] ^= 0xFF;
     }
     return ret;
 }

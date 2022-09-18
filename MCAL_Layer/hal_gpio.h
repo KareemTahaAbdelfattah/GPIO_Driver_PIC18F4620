@@ -21,7 +21,6 @@
 #define GPIO_CONFIGRATION_PIN         ENABLE_CONFIG
 
 /* max port numbers & pin numbers */
-#define BIT_MASK             (uint8)1
 #define MAX_PORT_NUM         5
 #define MAX_PIN_NUM          8
 
@@ -30,10 +29,10 @@
 
 /* Bitwise operators */
 #define HWREG8(_x)                                 (*((volatile unsigned char *)(_x)))
-#define SET_BIT(Register, Pos)                     (Register |= (BIT_MASK << Pos))
-#define CLEAR_BIT(Register, Pos)                   (Register &= ~(BIT_MASK << Pos))
-#define TOGGLE_BIT(Register, Pos)                  (Register ^= (BIT_MASK << Pos))
-#define READ_BIT(Register, Pos)                    ((BIT_MASK << Pos) & Register)
+#define SET_BIT(Register, Pos)                     (Register |= (1 << Pos))
+#define CLEAR_BIT(Register, Pos)                   (Register &= ~(1 << Pos))
+#define TOGGLE_BIT(Register, Pos)                  (Register ^= (1 << Pos))
+#define READ_BIT(Register, Pos)                    ((Register >> Pos) & 1)
 
 
  /* Section : Data Types Declaration */

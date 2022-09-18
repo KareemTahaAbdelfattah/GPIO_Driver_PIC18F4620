@@ -1,16 +1,14 @@
 /* 
- * File:   Application.h
+ * File:   ecu_led_cfg.h
  * Author: Kareem Taha
  * https://www.linkedin.com/in/kareem-taha-ba451621a/
- * Created on September 13, 2022, 10:10 PM
+ * Created on September 17, 2022, 12:41 AM
  */
 
-#ifndef APPLICATION_H
-#define	APPLICATION_H
+#ifndef ECU_LED_CFG_H
+#define	ECU_LED_CFG_H
 
  /* Section : Includes */
-#include "ECU_Layer/Ecu_led.h"
-#include "ECU_Layer/ecu_button.h"
 
  /* Section : Macros Definition */
 
@@ -20,8 +18,6 @@
 
  /* Section : Function Declaration */
 
-/* initialize any pin with direction & logic */
-void Application_initialize(void);
 
-#endif	/* APPLICATION_H */
+#endif	/* ECU_LED_CFG_H */
 

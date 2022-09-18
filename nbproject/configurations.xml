@@ -5,8 +5,13 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="ECU_Layer" displayName="ECU_Layer" projectFiles="true">
+        <logicalFolder name="BUTTON" displayName="BUTTON" projectFiles="true">
+          <itemPath>ECU_Layer/ecu_button.h</itemPath>
+          <itemPath>ECU_Layer/ecu_button_cfg.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="LED" displayName="LED" projectFiles="true">
           <itemPath>ECU_Layer/Ecu_led.h</itemPath>
+          <itemPath>ECU_Layer/LED/ecu_led_cfg.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="MCAL_Layer" displayName="MCAL_Layer" projectFiles="true">
@@ -29,6 +34,9 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="ECU_Layer" displayName="ECU_Layer" projectFiles="true">
+        <logicalFolder name="BUTTON" displayName="BUTTON" projectFiles="true">
+          <itemPath>ECU_Layer/ecu_button.c</itemPath>
+        </logicalFolder>
         <logicalFolder name="LED" displayName="LED" projectFiles="true">
           <itemPath>ECU_Layer/Ecu_led.c</itemPath>
         </logicalFolder>
