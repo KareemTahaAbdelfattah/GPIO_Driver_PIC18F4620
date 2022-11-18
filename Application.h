@@ -12,6 +12,16 @@
 #include "ECU_Layer/Ecu_led.h"
 #include "ECU_Layer/ecu_button.h"
 #include "ECU_Layer/RELAY/ecu_relay.h"
+#include "ECU_Layer/ecu_dc_motor/ecu_motor.h"
+#include "ECU_Layer/ecu_7_Segment/ecu_7_segment.h"
+#include "ECU_Layer/ecu_keypad/ecu_keypad.h"
+#include "ECU_Layer/ecu_lcd/ecu_lcd.h"
+#include "MCAL_Layer/Interrupt/hal_extrenal_interrupt.h"
+#include "MCAL_Layer/EEPROM/hal_eeprom.h"
+#include "MCAL_Layer/TIMER0/TIMER0.h"
+#include "timer1.h"
+#include "MCAL_Layer/TIMER2/timer2.h"
+#include "MCAL_Layer/TIMER3/timer3_hal.h"
 
  /* Section : Macros Definition */
 

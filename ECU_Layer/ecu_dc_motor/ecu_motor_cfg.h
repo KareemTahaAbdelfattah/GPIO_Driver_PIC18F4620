@@ -1,19 +1,15 @@
 /* 
- * File:   std_libraries.h
+ * File:   ecu_motor_cfg.h
  * Author: Kareem Taha
  * https://www.linkedin.com/in/kareem-taha-ba451621a/
- * Created on September 13, 2022, 9:58 PM
+ * Created on September 19, 2022, 4:40 PM
  */
 
-#ifndef STD_LIBRARIES_H
-#define	STD_LIBRARIES_H
+#ifndef ECU_MOTOR_CFG_H
+#define	ECU_MOTOR_CFG_H
 
 
  /* Section : Includes */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <xc.h>
 
  /* Section : Macros Definition */
 
@@ -23,8 +19,5 @@
 
  /* Section : Function Declaration */
 
-
-
-
-#endif	/* STD_LIBRARIES_H */
+#endif	/* ECU_MOTOR_CFG_H */
 

@@ -171,15 +171,7 @@ STD_ReturnType gpio_port_write_logic(const port_index_t port, uint8 logic){
     STD_ReturnType ret = E_OK;
     if(port > MAX_PORT_NUM - 1) ret = E_NOT_OK;
     else{
-        switch(logic){
-            case GPIO_HIGH:
-                *lat_register[port] = GPIO_HIGH;
-                break;
-            case GPIO_LOW:
-                *lat_register[port] = GPIO_LOW;
-                break;
-            default: ret = E_NOT_OK;
-        }
+        *lat_register[port] = logic;
     }
     return ret; 
 }
