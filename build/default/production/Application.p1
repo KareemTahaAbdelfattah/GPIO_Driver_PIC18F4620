@@ -1,31 +1,58 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"24 ./ECU_Layer/RELAY/ecu_relay.h
-[; ;./ECU_Layer/RELAY/ecu_relay.h: 24: typedef struct{
-[s S275 :4 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S275 . port pin status ]
-"12 Application.c
-[; ;Application.c: 12: relay_t relay1 = {
-[c E2816 0 1 2 3 4 .. ]
-[n E2816 . PORTA_INDEX PORTB_INDEX PORTC_INDEX PORTD_INDEX PORTE_INDEX  ]
-[c E2806 0 1 2 3 4 5 6 7 .. ]
-[n E2806 . GPIO_PIN0 GPIO_PIN1 GPIO_PIN2 GPIO_PIN3 GPIO_PIN4 GPIO_PIN5 GPIO_PIN6 GPIO_PIN7  ]
+"25 ./ECU_Layer/Ecu_led.h
+[; ;./ECU_Layer/Ecu_led.h: 25: typedef struct{
+[s S274 :4 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S274 . port_name pin_number led_status ]
+"271 Application.c
+[; ;Application.c: 271: led_t led1 = {
+[c E2983 0 1 2 3 4 .. ]
+[n E2983 . PORTA_INDEX PORTB_INDEX PORTC_INDEX PORTD_INDEX PORTE_INDEX  ]
+[c E2973 0 1 2 3 4 5 6 7 .. ]
+[n E2973 . GPIO_PIN0 GPIO_PIN1 GPIO_PIN2 GPIO_PIN3 GPIO_PIN4 GPIO_PIN5 GPIO_PIN6 GPIO_PIN7  ]
+[c E3023 0 1 .. ]
+[n E3023 . LED_LOW LED_HIGH  ]
+"42 ./ECU_Layer/Ecu_led.h
+[; ;./ECU_Layer/Ecu_led.h: 42: STD_ReturnType led_toggle_logic(const led_t *led);
+[v _led_toggle_logic `(uc ~T0 @X0 0 ef1`*CS274 ]
+[v F3276 `(v ~T0 @X0 0 tf ]
+"307 Application.c
+[; ;Application.c: 307: timer2_t timer2_obj = {
+[c E3180 0 1 .. ]
+[n E3180 . INTERRUPT_Low_Priority INTERRUPT_High_Priority  ]
+"49 ./MCAL_Layer/TIMER2/timer2.h
+[; ;./MCAL_Layer/TIMER2/timer2.h: 49: typedef struct{
+[s S287 `*F3276 1 `E3180 1 :4 `uc 1 :2 `uc 1 `uc 1 ]
+[n S287 . TIMER2_InterruptHandler priority timer2_postscaler timer2_prescaler timer2_preload_value ]
+[v F3233 `(v ~T0 @X0 0 tf ]
+"316 Application.c
+[; ;Application.c: 316: timer0_t timer0_obj = {
+[c E3221 0 1 2 3 4 5 6 7 .. ]
+[n E3221 . TIMER0_PRESCALER_DIV_BY_2 TIMER0_PRESCALER_DIV_BY_4 TIMER0_PRESCALER_DIV_BY_8 TIMER0_PRESCALER_DIV_BY_16 TIMER0_PRESCALER_DIV_BY_32 TIMER0_PRESCALER_DIV_BY_64 TIMER0_PRESCALER_DIV_BY_128 TIMER0_PRESCALER_DIV_BY_256  ]
+"60 ./MCAL_Layer/TIMER0/TIMER0.h
+[; ;./MCAL_Layer/TIMER0/TIMER0.h: 60: typedef struct{
+[s S285 `*F3233 1 `E3180 1 `E3221 1 `us 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S285 . TIMER0_InterruptHandler priority prescaler_value timer0_preload_value timer0_reg_size prescaler_en timer0_counter_edge timer0_mode timer0_reserved ]
+[v F3255 `(v ~T0 @X0 0 tf ]
+"62 ./timer1.h
+[; ;./timer1.h: 62: typedef struct{
+[s S286 `*F3255 1 `E3180 1 `us 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 ]
+[n S286 . TIMER1_InterruptHandler priority timer1_preload_value timer1_mode timer1_counter_mode timer1_oscillator_cfg timer1_reg_rw_mode timer1_prescaler ]
+[v F3294 `(v ~T0 @X0 0 tf ]
+"57 ./MCAL_Layer/TIMER3/timer3_hal.h
+[; ;./MCAL_Layer/TIMER3/timer3_hal.h: 57: typedef struct{
+[s S288 `*F3294 1 `E3180 1 `us 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 ]
+[n S288 . TIMER3_InterruptHandler priority timer3_preload_value timer3_prescaler timer3_mode timer3_counter_mode timer3_reg_rw_mode timer3_reserved ]
+[v F3399 `(v ~T0 @X0 0 tf ]
 [p mainexit ]
-"27 ./Application.h
-[; ;./Application.h: 27: void Application_initialize(void);
+"37 ./Application.h
+[; ;./Application.h: 37: void Application_initialize(void);
 [v _Application_initialize `(v ~T0 @X0 0 ef ]
-"33 ./ECU_Layer/RELAY/ecu_relay.h
-[; ;./ECU_Layer/RELAY/ecu_relay.h: 33: STD_ReturnType relay_turn_on(const relay_t *_relay);
-[v _relay_turn_on `(uc ~T0 @X0 0 ef1`*CS275 ]
-[v F510 `(v ~T0 @X0 1 tf1`ul ]
-"12 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\pic\include\builtins.h
-[v __delay `JF510 ~T0 @X0 0 e ]
-[p i __delay ]
-"34 ./ECU_Layer/RELAY/ecu_relay.h
-[; ;./ECU_Layer/RELAY/ecu_relay.h: 34: STD_ReturnType relay_turn_off(const relay_t *_relay);
-[v _relay_turn_off `(uc ~T0 @X0 0 ef1`*CS275 ]
-"32
-[; ;./ECU_Layer/RELAY/ecu_relay.h: 32: STD_ReturnType relay_initialize(const relay_t *_relay);
-[v _relay_initialize `(uc ~T0 @X0 0 ef1`*CS275 ]
+"80 ./MCAL_Layer/TIMER3/timer3_hal.h
+[; ;./MCAL_Layer/TIMER3/timer3_hal.h: 80: STD_ReturnType timer3_init(const timer3_t *_timer);
+[v _timer3_init `(uc ~T0 @X0 0 ef1`*CS288 ]
+"33 ./ECU_Layer/Ecu_led.h
+[; ;./ECU_Layer/Ecu_led.h: 33: STD_ReturnType led_initialize(const led_t *led);
+[v _led_initialize `(uc ~T0 @X0 0 ef1`*CS274 ]
 "55 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\pic\include\proc\pic18f4620.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\pic\include\proc\pic18f4620.h: 55: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -437,95 +464,249 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6716
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\pic\include\proc\pic18f4620.h: 6716: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"10 Application.c
-[; ;Application.c: 10: STD_ReturnType ret = (STD_ReturnType)0x01;
+"11 Application.c
+[; ;Application.c: 11: STD_ReturnType ret = (STD_ReturnType)0x01;
 [v _ret `uc ~T0 @X0 1 e ]
 [i _ret
 -> -> 1 `i `uc
 ]
-"12
-[; ;Application.c: 12: relay_t relay1 = {
-[v _relay1 `S275 ~T0 @X0 1 e ]
-[i _relay1
+"271
+[; ;Application.c: 271: led_t led1 = {
+[v _led1 `S274 ~T0 @X0 1 e ]
+[i _led1
 :U ..
 :U ..
--> . `E2816 2 `uc
--> . `E2806 0 `uc
--> -> 0 `i `uc
+-> . `E2983 2 `uc
+-> . `E2973 0 `uc
+-> . `E3023 0 `uc
 ..
 ..
 ]
-"17
-[; ;Application.c: 17: relay_t relay2 = {
-[v _relay2 `S275 ~T0 @X0 1 e ]
-[i _relay2
+"277
+[; ;Application.c: 277: led_t led2 = {
+[v _led2 `S274 ~T0 @X0 1 e ]
+[i _led2
 :U ..
 :U ..
--> . `E2816 2 `uc
--> . `E2806 1 `uc
+-> . `E2983 2 `uc
+-> . `E2973 1 `uc
+-> . `E3023 0 `uc
+..
+..
+]
+"283
+[; ;Application.c: 283: led_t led3 = {
+[v _led3 `S274 ~T0 @X0 1 e ]
+[i _led3
+:U ..
+:U ..
+-> . `E2983 2 `uc
+-> . `E2973 2 `uc
+-> . `E3023 0 `uc
+..
+..
+]
+"289
+[; ;Application.c: 289: volatile uint32 counter_value = 0;
+[v _counter_value `Vui ~T0 @X0 1 e ]
+[i _counter_value
+-> -> 0 `i `ui
+]
+"291
+[; ;Application.c: 291: void timer0_defaultHandler(void){
+[v _timer0_defaultHandler `(v ~T0 @X0 1 ef ]
+{
+[e :U _timer0_defaultHandler ]
+[f ]
+"292
+[; ;Application.c: 292:     counter_value++;
+[e ++ _counter_value -> -> 1 `i `Vui ]
+"296
+[; ;Application.c: 296: };
+[e :UE 290 ]
+}
+"300
+[; ;Application.c: 300: void timer2_defaultHandler(void){
+[v _timer2_defaultHandler `(v ~T0 @X0 1 ef ]
+{
+[e :U _timer2_defaultHandler ]
+[f ]
+"301
+[; ;Application.c: 301:     led_toggle_logic(&led1);
+[e ( _led_toggle_logic (1 -> &U _led1 `*CS274 ]
+"302
+[; ;Application.c: 302:     led_toggle_logic(&led2);
+[e ( _led_toggle_logic (1 -> &U _led2 `*CS274 ]
+"303
+[; ;Application.c: 303:     led_toggle_logic(&led3);
+[e ( _led_toggle_logic (1 -> &U _led3 `*CS274 ]
+"304
+[; ;Application.c: 304: };
+[e :UE 291 ]
+}
+"307
+[; ;Application.c: 307: timer2_t timer2_obj = {
+[v _timer2_obj `S287 ~T0 @X0 1 e ]
+[i _timer2_obj
+:U ..
+:U ..
+&U _timer2_defaultHandler
+-> -> 0 `i `E3180
+-> -> 15 `i `uc
+-> -> 0 `i `uc
+-> -> 249 `i `uc
+..
+..
+]
+"316
+[; ;Application.c: 316: timer0_t timer0_obj = {
+[v _timer0_obj `S285 ~T0 @X0 1 e ]
+[i _timer0_obj
+:U ..
+:U ..
+&U _timer0_defaultHandler
+-> -> 0 `i `E3180
+. `E3221 3
+-> -> 3036 `i `us
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+..
+..
+]
+"325
+[; ;Application.c: 325: void timer1_defaultHandler(void){
+[v _timer1_defaultHandler `(v ~T0 @X0 1 ef ]
+{
+[e :U _timer1_defaultHandler ]
+[f ]
+"326
+[; ;Application.c: 326:     led_toggle_logic(&led2);
+[e ( _led_toggle_logic (1 -> &U _led2 `*CS274 ]
+"327
+[; ;Application.c: 327:     led_toggle_logic(&led3);
+[e ( _led_toggle_logic (1 -> &U _led3 `*CS274 ]
+"328
+[; ;Application.c: 328: };
+[e :UE 292 ]
+}
+"330
+[; ;Application.c: 330: timer1_t timer1_obj = {
+[v _timer1_obj `S286 ~T0 @X0 1 e ]
+[i _timer1_obj
+:U ..
+:U ..
+&U _timer1_defaultHandler
+. `E3180 0
+-> -> 3036 `i `us
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 3 `i `uc
+..
+..
+]
+"343
+[; ;Application.c: 343: void timer3_defaultHandler(void){
+[v _timer3_defaultHandler `(v ~T0 @X0 1 ef ]
+{
+[e :U _timer3_defaultHandler ]
+[f ]
+"344
+[; ;Application.c: 344:     led_toggle_logic(&led1);
+[e ( _led_toggle_logic (1 -> &U _led1 `*CS274 ]
+"345
+[; ;Application.c: 345:     led_toggle_logic(&led2);
+[e ( _led_toggle_logic (1 -> &U _led2 `*CS274 ]
+"346
+[; ;Application.c: 346:     led_toggle_logic(&led3);
+[e ( _led_toggle_logic (1 -> &U _led3 `*CS274 ]
+"347
+[; ;Application.c: 347: };
+[e :UE 293 ]
+}
+"349
+[; ;Application.c: 349: timer3_t timer3_obj = {
+[v _timer3_obj `S288 ~T0 @X0 1 e ]
+[i _timer3_obj
+:U ..
+:U ..
+&U _timer3_defaultHandler
+. `E3180 0
+-> -> 3036 `i `us
+-> -> 3 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+..
+..
+]
+"359
+[; ;Application.c: 359: timer1_t counter1_obj = {
+[v _counter1_obj `S286 ~T0 @X0 1 e ]
+[i _counter1_obj
+:U ..
+:U ..
+-> -> -> 0 `i `*v `*F3399
+-> -> 0 `i `E3180
+-> -> 0 `i `us
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+-> -> 1 `i `uc
 -> -> 0 `i `uc
 ..
 ..
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"24
-[; ;Application.c: 24: int main() {
+"368
+[; ;Application.c: 368: int main() {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"25
-[; ;Application.c: 25:     Application_initialize();
+"369
+[; ;Application.c: 369:     Application_initialize();
 [e ( _Application_initialize ..  ]
-"26
-[; ;Application.c: 26:     while(1){
-[e :U 278 ]
+"370
+[; ;Application.c: 370:     ret = timer3_init(&timer3_obj);
+[e = _ret ( _timer3_init (1 -> &U _timer3_obj `*CS288 ]
+"371
+[; ;Application.c: 371:     while(1){
+[e :U 296 ]
 {
-"27
-[; ;Application.c: 27:         ret = relay_turn_on(&relay1);
-[e = _ret ( _relay_turn_on (1 -> &U _relay1 `*CS275 ]
-"28
-[; ;Application.c: 28:         _delay(5000000);
-[e ( __delay (1 -> -> 5000000 `l `ul ]
-"29
-[; ;Application.c: 29:         ret = relay_turn_off(&relay1);
-[e = _ret ( _relay_turn_off (1 -> &U _relay1 `*CS275 ]
-"30
-[; ;Application.c: 30:         ret = relay_turn_on(&relay2);
-[e = _ret ( _relay_turn_on (1 -> &U _relay2 `*CS275 ]
-"31
-[; ;Application.c: 31:         _delay(5000000);
-[e ( __delay (1 -> -> 5000000 `l `ul ]
-"32
-[; ;Application.c: 32:         ret = relay_turn_off(&relay2);
-[e = _ret ( _relay_turn_off (1 -> &U _relay2 `*CS275 ]
-"33
-[; ;Application.c: 33:     }
+"373
+[; ;Application.c: 373:     }
 }
-[e :U 277 ]
-[e $U 278  ]
-[e :U 279 ]
-"34
-[; ;Application.c: 34:     return (0);
+[e :U 295 ]
+[e $U 296  ]
+[e :U 297 ]
+"374
+[; ;Application.c: 374:     return (0);
 [e ) -> 0 `i ]
-[e $UE 276  ]
-"35
-[; ;Application.c: 35: }
-[e :UE 276 ]
+[e $UE 294  ]
+"375
+[; ;Application.c: 375: }
+[e :UE 294 ]
 }
-"38
-[; ;Application.c: 38: void Application_initialize(void){
+"378
+[; ;Application.c: 378: void Application_initialize(void){
 [v _Application_initialize `(v ~T0 @X0 1 ef ]
 {
 [e :U _Application_initialize ]
 [f ]
-"39
-[; ;Application.c: 39:     ret = relay_initialize(&relay1);
-[e = _ret ( _relay_initialize (1 -> &U _relay1 `*CS275 ]
-"40
-[; ;Application.c: 40:     ret = relay_initialize(&relay2);
-[e = _ret ( _relay_initialize (1 -> &U _relay2 `*CS275 ]
-"41
-[; ;Application.c: 41: }
-[e :UE 280 ]
+"379
+[; ;Application.c: 379:     ret = led_initialize(&led1);
+[e = _ret ( _led_initialize (1 -> &U _led1 `*CS274 ]
+"380
+[; ;Application.c: 380:     ret = led_initialize(&led2);
+[e = _ret ( _led_initialize (1 -> &U _led2 `*CS274 ]
+"381
+[; ;Application.c: 381:     ret = led_initialize(&led3);
+[e = _ret ( _led_initialize (1 -> &U _led3 `*CS274 ]
+"382
+[; ;Application.c: 382: }
+[e :UE 298 ]
 }

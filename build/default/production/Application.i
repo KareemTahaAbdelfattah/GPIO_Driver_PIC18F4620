@@ -254,6 +254,63 @@ udiv_t udiv (unsigned int, unsigned int);
 uldiv_t uldiv (unsigned long, unsigned long);
 # 14 "./ECU_Layer/../MCAL_Layer/std_libraries.h" 2
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 411 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 25 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\string.h" 2 3
+
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+# 65 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c99\\string.h" 3
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 15 "./ECU_Layer/../MCAL_Layer/std_libraries.h" 2
+
 # 1 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4629,7 +4686,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8\\pic\\include\\xc.h" 2 3
-# 15 "./ECU_Layer/../MCAL_Layer/std_libraries.h" 2
+# 16 "./ECU_Layer/../MCAL_Layer/std_libraries.h" 2
 # 13 "./ECU_Layer/../MCAL_Layer/std_types.h" 2
 
 # 1 "./ECU_Layer/../MCAL_Layer/compiler.h" 1
@@ -4847,40 +4904,526 @@ STD_ReturnType relay_initialize(const relay_t *_relay);
 STD_ReturnType relay_turn_on(const relay_t *_relay);
 STD_ReturnType relay_turn_off(const relay_t *_relay);
 # 14 "./Application.h" 2
-# 27 "./Application.h"
+
+# 1 "./ECU_Layer/ecu_dc_motor/ecu_motor.h" 1
+# 13 "./ECU_Layer/ecu_dc_motor/ecu_motor.h"
+# 1 "./ECU_Layer/ecu_dc_motor/ecu_motor_cfg.h" 1
+# 13 "./ECU_Layer/ecu_dc_motor/ecu_motor.h" 2
+# 24 "./ECU_Layer/ecu_dc_motor/ecu_motor.h"
+typedef struct{
+    uint8 port : 4;
+    uint8 pin : 3;
+    uint8 status: 1;
+}Dc_motor_pin_t;
+
+typedef struct{
+    Dc_motor_pin_t two_direction[2];
+}Dc_motor_t;
+# 43 "./ECU_Layer/ecu_dc_motor/ecu_motor.h"
+STD_ReturnType Dc_motor_initialize(const Dc_motor_t *_dc_motor);
+# 53 "./ECU_Layer/ecu_dc_motor/ecu_motor.h"
+STD_ReturnType Dc_motor_turn_left(const Dc_motor_t *_dc_motor);
+# 63 "./ECU_Layer/ecu_dc_motor/ecu_motor.h"
+STD_ReturnType Dc_motor_turn_right(const Dc_motor_t *_dc_motor);
+# 73 "./ECU_Layer/ecu_dc_motor/ecu_motor.h"
+STD_ReturnType Dc_motor_stop(const Dc_motor_t *_dc_motor);
+# 15 "./Application.h" 2
+
+# 1 "./ECU_Layer/ecu_7_Segment/ecu_7_segment.h" 1
+# 12 "./ECU_Layer/ecu_7_Segment/ecu_7_segment.h"
+# 1 "./ECU_Layer/ecu_7_Segment/ecu_7_segment_cfg.h" 1
+# 12 "./ECU_Layer/ecu_7_Segment/ecu_7_segment.h" 2
+# 24 "./ECU_Layer/ecu_7_Segment/ecu_7_segment.h"
+typedef enum{
+    SEGMENT_COM_ANODE,
+    SEGMENT_COM_CATHODE,
+}segment_type_t;
+
+
+typedef struct{
+    pin_config_t segment_pins[4];
+    segment_type_t segment_type;
+}segment_t;
+
+
+
+STD_ReturnType segment_initialize(const segment_t *_segment);
+STD_ReturnType segment_write_num(const segment_t *_segment, uint8 _number);
+# 16 "./Application.h" 2
+
+# 1 "./ECU_Layer/ecu_keypad/ecu_keypad.h" 1
+# 12 "./ECU_Layer/ecu_keypad/ecu_keypad.h"
+# 1 "./ECU_Layer/ecu_keypad/ecu_keypad_cfg.h" 1
+# 12 "./ECU_Layer/ecu_keypad/ecu_keypad.h" 2
+# 22 "./ECU_Layer/ecu_keypad/ecu_keypad.h"
+typedef struct{
+    pin_config_t keypad_row_pins[4];
+    pin_config_t keypad_colomns_pins[4];
+}keypad_t;
+
+
+STD_ReturnType keypad_initialize(const keypad_t *_keypad);
+STD_ReturnType keypad_get_value(const keypad_t *_keypad, uint8 *value);
+# 17 "./Application.h" 2
+
+# 1 "./ECU_Layer/ecu_lcd/ecu_lcd.h" 1
+# 12 "./ECU_Layer/ecu_lcd/ecu_lcd.h"
+# 1 "./ECU_Layer/ecu_lcd/ecu_lcd_cfg.h" 1
+# 12 "./ECU_Layer/ecu_lcd/ecu_lcd.h" 2
+# 33 "./ECU_Layer/ecu_lcd/ecu_lcd.h"
+typedef struct{
+    pin_config_t lcd_rs;
+    pin_config_t lcd_en;
+    pin_config_t lcd_data_4_bit[4];
+}ch_lcd_4bit_t;
+
+
+typedef struct{
+    pin_config_t lcd_rs;
+    pin_config_t lcd_en;
+    pin_config_t lcd_data_8_bit[8];
+}ch_lcd_8bit_t;
+
+
+
+STD_ReturnType lcd_4_bit_initialize(const ch_lcd_4bit_t *lcd);
+STD_ReturnType lcd_4_bit_send_command(const ch_lcd_4bit_t *lcd, uint8 command);
+STD_ReturnType lcd_4_bit_send_char_data(const ch_lcd_4bit_t *lcd, uint8 data);
+STD_ReturnType lcd_4_bit_send_char_data_pos(const ch_lcd_4bit_t *lcd, uint8 row, uint8 column ,uint8 data);
+STD_ReturnType lcd_4_bit_send_string(const ch_lcd_4bit_t *lcd, uint8 *str);
+STD_ReturnType lcd_4_bit_send_string_pos(const ch_lcd_4bit_t *lcd, uint8 row, uint8 column ,uint8 *str);
+STD_ReturnType lcd_4_bit_send_custom_char(const ch_lcd_4bit_t *lcd, uint8 row, uint8 column ,const uint8 _chr[], uint8 pos);
+
+
+
+STD_ReturnType lcd_8_bit_initialize(const ch_lcd_8bit_t *lcd);
+STD_ReturnType lcd_8_bit_send_command(const ch_lcd_8bit_t *lcd, uint8 command);
+STD_ReturnType lcd_8_bit_send_char_data(const ch_lcd_8bit_t *lcd, uint8 data);
+STD_ReturnType lcd_8_bit_send_char_data_pos(const ch_lcd_8bit_t *lcd, uint8 row, uint8 column ,uint8 data);
+STD_ReturnType lcd_8_bit_send_string(const ch_lcd_8bit_t *lcd, uint8 *str);
+STD_ReturnType lcd_8_bit_send_string_pos(const ch_lcd_8bit_t *lcd, uint8 row, uint8 column ,uint8 *str);
+STD_ReturnType lcd_8_bit_send_custom_char(const ch_lcd_8bit_t *lcd, uint8 row, uint8 column ,const uint8 _chr[], uint8 pos);
+
+
+STD_ReturnType convert_byte_to_string(uint8 value, uint8 *str);
+STD_ReturnType convert_short_to_string(uint16 value, uint8 *str);
+STD_ReturnType convert_int_to_string(uint32 value, uint8 *str);
+# 18 "./Application.h" 2
+
+# 1 "./MCAL_Layer/Interrupt/hal_extrenal_interrupt.h" 1
+# 13 "./MCAL_Layer/Interrupt/hal_extrenal_interrupt.h"
+# 1 "./MCAL_Layer/Interrupt/hal_interrupt_cfg.h" 1
+# 19 "./MCAL_Layer/Interrupt/hal_interrupt_cfg.h"
+# 1 "./MCAL_Layer/Interrupt/hal_interrupt_gen_cfg.h" 1
+# 19 "./MCAL_Layer/Interrupt/hal_interrupt_cfg.h" 2
+# 60 "./MCAL_Layer/Interrupt/hal_interrupt_cfg.h"
+typedef enum{
+    INTERRUPT_Low_Priority = 0,
+    INTERRUPT_High_Priority,
+}Interrupt_Priority_cfg;
+# 13 "./MCAL_Layer/Interrupt/hal_extrenal_interrupt.h" 2
+# 82 "./MCAL_Layer/Interrupt/hal_extrenal_interrupt.h"
+typedef enum{
+    INTERRUPT_FALLING_EDGE = 0,
+    INTERRUPT_RAISING_EDGE,
+}Interrupt_INTx_edge;
+
+
+
+typedef enum{
+    INTERRUPT_EXTERNAL_INT0 = 0,
+    INTERRUPT_EXTERNAL_INT1,
+    INTERRUPT_EXTERNAL_INT2,
+}Interrupt_INTx_src;
+
+
+typedef struct{
+    void (* Interrupt_Handler)(void);
+    pin_config_t mcu_pin;
+    Interrupt_INTx_edge edge;
+    Interrupt_INTx_src source;
+    Interrupt_Priority_cfg priority;
+}Interrupt_INTx_t;
+
+
+
+typedef struct{
+    void (* Interrupt_Handler)(void);
+    pin_config_t mcu_pin;
+    Interrupt_Priority_cfg priority;
+}Interrupt_RBx_t;
+
+
+
+
+STD_ReturnType Interrupt_INTx_Init(const Interrupt_INTx_t *interrupt_obj);
+STD_ReturnType Interrupt_INTx_DeInit(const Interrupt_INTx_t *interrupt_obj);
+
+STD_ReturnType Interrupt_RBx_Init(const Interrupt_RBx_t *interrupt_obj);
+STD_ReturnType Interrupt_RBx_DeInit(const Interrupt_RBx_t *interrupt_obj);
+# 19 "./Application.h" 2
+
+# 1 "./MCAL_Layer/EEPROM/hal_eeprom.h" 1
+# 16 "./MCAL_Layer/EEPROM/hal_eeprom.h"
+# 1 "./MCAL_Layer/EEPROM/../Interrupt/hal_internal_interrupt.h" 1
+# 16 "./MCAL_Layer/EEPROM/hal_eeprom.h" 2
+# 25 "./MCAL_Layer/EEPROM/hal_eeprom.h"
+STD_ReturnType Data_EEPROM_WriteByte(uint16 bAdd, uint8 bData);
+STD_ReturnType Data_EEPROM_ReadByte(uint16 bAdd, uint8 *bData);
+# 20 "./Application.h" 2
+
+# 1 "./MCAL_Layer/TIMER0/TIMER0.h" 1
+# 12 "./MCAL_Layer/TIMER0/TIMER0.h"
+# 1 "./MCAL_Layer/TIMER0/TIMER0_cfg.h" 1
+# 12 "./MCAL_Layer/TIMER0/TIMER0.h" 2
+# 49 "./MCAL_Layer/TIMER0/TIMER0.h"
+typedef enum{
+    TIMER0_PRESCALER_DIV_BY_2 = 0,
+    TIMER0_PRESCALER_DIV_BY_4,
+    TIMER0_PRESCALER_DIV_BY_8,
+    TIMER0_PRESCALER_DIV_BY_16,
+    TIMER0_PRESCALER_DIV_BY_32,
+    TIMER0_PRESCALER_DIV_BY_64,
+    TIMER0_PRESCALER_DIV_BY_128,
+    TIMER0_PRESCALER_DIV_BY_256
+}timer0_prescaler_select_t;
+
+typedef struct{
+
+    void(*TIMER0_InterruptHandler)(void);
+    Interrupt_Priority_cfg priority;
+
+    timer0_prescaler_select_t prescaler_value;
+    uint16 timer0_preload_value;
+    uint8 timer0_reg_size : 1;
+    uint8 prescaler_en : 1;
+    uint8 timer0_counter_edge : 1;
+    uint8 timer0_mode: 1;
+    uint8 timer0_reserved: 4;
+}timer0_t;
+# 81 "./MCAL_Layer/TIMER0/TIMER0.h"
+STD_ReturnType timer0_init(const timer0_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer0_Deinit(const timer0_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer0_write_value(const timer0_t *_timer, uint16 _value);
+# 106 "./MCAL_Layer/TIMER0/TIMER0.h"
+STD_ReturnType timer0_read_value(const timer0_t *_timer, uint16 *_value);
+# 21 "./Application.h" 2
+
+# 1 "./timer1.h" 1
+# 12 "./timer1.h"
+# 1 "./timer1_cfg.h" 1
+# 12 "./timer1.h" 2
+# 62 "./timer1.h"
+typedef struct{
+
+    void(*TIMER1_InterruptHandler)(void);
+    Interrupt_Priority_cfg priority;
+
+    uint16 timer1_preload_value;
+    uint8 timer1_mode: 1;
+    uint8 timer1_counter_mode: 1;
+    uint8 timer1_oscillator_cfg: 1;
+    uint8 timer1_reg_rw_mode: 1;
+    uint8 timer1_prescaler: 2;
+}timer1_t;
+# 82 "./timer1.h"
+STD_ReturnType timer1_init(const timer1_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer1_Deinit(const timer1_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer1_write_value(const timer1_t *_timer, uint16 _value);
+# 107 "./timer1.h"
+STD_ReturnType timer1_read_value(const timer1_t *_timer, uint16 *_value);
+# 22 "./Application.h" 2
+
+# 1 "./MCAL_Layer/TIMER2/timer2.h" 1
+# 49 "./MCAL_Layer/TIMER2/timer2.h"
+typedef struct{
+
+    void(*TIMER2_InterruptHandler)(void);
+    Interrupt_Priority_cfg priority;
+
+    uint8 timer2_postscaler: 4;
+    uint8 timer2_prescaler: 2;
+    uint8 timer2_preload_value;
+}timer2_t;
+# 70 "./MCAL_Layer/TIMER2/timer2.h"
+STD_ReturnType timer2_init(const timer2_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer2_Deinit(const timer2_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer2_write_value(const timer2_t *_timer, uint8 _value);
+# 95 "./MCAL_Layer/TIMER2/timer2.h"
+STD_ReturnType timer2_read_value(const timer2_t *_timer, uint8 *_value);
+# 23 "./Application.h" 2
+
+# 1 "./MCAL_Layer/TIMER3/timer3_hal.h" 1
+# 57 "./MCAL_Layer/TIMER3/timer3_hal.h"
+typedef struct{
+
+    void(*TIMER3_InterruptHandler)(void);
+    Interrupt_Priority_cfg priority;
+
+    uint16 timer3_preload_value;
+    uint8 timer3_prescaler: 2;
+    uint8 timer3_mode: 1;
+    uint8 timer3_counter_mode: 1;
+    uint8 timer3_reg_rw_mode: 1;
+    uint8 timer3_reserved: 3;
+}timer3_t;
+# 80 "./MCAL_Layer/TIMER3/timer3_hal.h"
+STD_ReturnType timer3_init(const timer3_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer3_Deinit(const timer3_t *_timer);
+
+
+
+
+
+
+
+STD_ReturnType timer3_write_value(const timer3_t *_timer, uint16 _value);
+# 105 "./MCAL_Layer/TIMER3/timer3_hal.h"
+STD_ReturnType timer3_read_value(const timer3_t *_timer, uint16 *_value);
+# 24 "./Application.h" 2
+# 37 "./Application.h"
 void Application_initialize(void);
 # 8 "Application.c" 2
 
+# 1 "./MCAL_Layer/ADC/hal_adc.h" 1
+# 15 "./MCAL_Layer/ADC/hal_adc.h"
+# 1 "./MCAL_Layer/ADC/hal_adc_cfg.h" 1
+# 15 "./MCAL_Layer/ADC/hal_adc.h" 2
+# 83 "./MCAL_Layer/ADC/hal_adc.h"
+typedef enum{
+    ADC_CHANNEL_AN0 = 0,
+    ADC_CHANNEL_AN1,
+    ADC_CHANNEL_AN2,
+    ADC_CHANNEL_AN3,
+    ADC_CHANNEL_AN4,
+    ADC_CHANNEL_AN5,
+    ADC_CHANNEL_AN6,
+    ADC_CHANNEL_AN7,
+    ADC_CHANNEL_AN8,
+    ADC_CHANNEL_AN9,
+    ADC_CHANNEL_AN10,
+    ADC_CHANNEL_AN11,
+    ADC_CHANNEL_AN12,
+}adc_select_channel_t;
+
+
+typedef enum{
+    ADC_0_TAD = 0,
+    ADC_2_TAD,
+    ADC_4_TAD,
+    ADC_6_TAD,
+    ADC_8_TAD,
+    ADC_12_TAD,
+    ADC_16_TAD,
+    ADC_20_TAD,
+}adc_acquicition_time_t;
+
+
+typedef enum{
+    ADC_CONVERSION_CLOCK_FOSC_DIV_2 = 0,
+    ADC_CONVERSION_CLOCK_FOSC_DIV_8,
+    ADC_CONVERSION_CLOCK_FOSC_DIV_32,
+    ADC_CONVERSION_CLOCK_FOSC_DIV_FRC,
+    ADC_CONVERSION_CLOCK_FOSC_DIV_4,
+    ADC_CONVERSION_CLOCK_FOSC_DIV_16,
+    ADC_CONVERSION_CLOCK_FOSC_DIV_64,
+}adc_conversion_clock_t;
+
+
+typedef struct{
+
+    void (* ADC_InterruptHandler)(void);
+    Interrupt_Priority_cfg priority;
+
+    adc_acquicition_time_t acquicition_time;
+    adc_conversion_clock_t onversion_clock;
+    adc_select_channel_t select_channel;
+    uint8 voltage_ref: 1;
+    uint8 format_status: 1;
+    uint8 ADC_Resreved: 6;
+}adc_conf_t;
+
+
+
+
+STD_ReturnType ADC_Init(const adc_conf_t *_adc);
+
+STD_ReturnType ADC_DeInit(const adc_conf_t *_adc);
+
+STD_ReturnType ADC_Select_Channel(const adc_conf_t *_adc, adc_select_channel_t adc_channel);
+
+STD_ReturnType ADC_Start_Conversion(const adc_conf_t *_adc);
+
+STD_ReturnType ADC_Is_Conversion_done(const adc_conf_t *_adc, uint8 *conversion_status);
+
+STD_ReturnType ADC_GetConversion_Status_Result(const adc_conf_t *_adc, uint16 *converstion_result);
+
+STD_ReturnType ADC_GetConversion_Blocking(const adc_conf_t *_adc, adc_select_channel_t adc_channel, uint16 *conversion_result);
+
+STD_ReturnType ADC_StartConversion_Interrupt(const adc_conf_t *_adc, adc_select_channel_t adc_channel);
+# 9 "Application.c" 2
+
 
 STD_ReturnType ret = (STD_ReturnType)0x01;
-
-relay_t relay1 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN0,
-    .status = 0x00
-};
-relay_t relay2 = {
-    .port = PORTC_INDEX,
-    .pin = GPIO_PIN1,
-    .status = 0x00
+# 271 "Application.c"
+led_t led1 = {
+  .led_status = LED_LOW,
+  .pin_number = GPIO_PIN0,
+  .port_name = PORTC_INDEX,
 };
 
+led_t led2 = {
+  .led_status = LED_LOW,
+  .pin_number = GPIO_PIN1,
+  .port_name = PORTC_INDEX,
+};
+
+led_t led3 = {
+  .led_status = LED_LOW,
+  .pin_number = GPIO_PIN2,
+  .port_name = PORTC_INDEX,
+};
+
+volatile uint32 counter_value = 0;
+
+void timer0_defaultHandler(void){
+    counter_value++;
+
+
+
+};
+
+
+
+void timer2_defaultHandler(void){
+    led_toggle_logic(&led1);
+    led_toggle_logic(&led2);
+    led_toggle_logic(&led3);
+};
+
+
+timer2_t timer2_obj = {
+  .TIMER2_InterruptHandler = timer2_defaultHandler,
+  .timer2_postscaler = 15,
+  .timer2_prescaler = 0,
+  .timer2_preload_value = 249,
+};
+
+
+
+timer0_t timer0_obj = {
+    .TIMER0_InterruptHandler = timer0_defaultHandler,
+    .timer0_mode = 1,
+    .timer0_reg_size = 0,
+    .prescaler_en = 1,
+    .prescaler_value = TIMER0_PRESCALER_DIV_BY_16,
+    .timer0_preload_value = 3036
+};
+
+void timer1_defaultHandler(void){
+    led_toggle_logic(&led2);
+    led_toggle_logic(&led3);
+};
+
+timer1_t timer1_obj = {
+    .TIMER1_InterruptHandler = timer1_defaultHandler,
+    .timer1_mode = 0,
+    .priority = INTERRUPT_Low_Priority,
+    .timer1_preload_value = 3036,
+    .timer1_prescaler = 3,
+    .timer1_reg_rw_mode = 1,
+};
+
+
+
+
+
+void timer3_defaultHandler(void){
+    led_toggle_logic(&led1);
+    led_toggle_logic(&led2);
+    led_toggle_logic(&led3);
+};
+
+timer3_t timer3_obj = {
+    .TIMER3_InterruptHandler = timer3_defaultHandler,
+    .timer3_mode = 0,
+    .priority = INTERRUPT_Low_Priority,
+    .timer3_preload_value = 3036,
+    .timer3_prescaler = 3,
+    .timer3_reg_rw_mode = 1,
+};
+
+
+timer1_t counter1_obj = {
+    .TIMER1_InterruptHandler = ((void*)0),
+    .timer1_mode = 1,
+    .timer1_preload_value = 0,
+    .timer1_prescaler = 0,
+    .timer1_reg_rw_mode = 1,
+    .timer1_counter_mode = 1,
+};
 
 int main() {
     Application_initialize();
+    ret = timer3_init(&timer3_obj);
     while(1){
-        ret = relay_turn_on(&relay1);
-        _delay(5000000);
-        ret = relay_turn_off(&relay1);
-        ret = relay_turn_on(&relay2);
-        _delay(5000000);
-        ret = relay_turn_off(&relay2);
+
     }
     return (0);
 }
 
 
 void Application_initialize(void){
-    ret = relay_initialize(&relay1);
-    ret = relay_initialize(&relay2);
+    ret = led_initialize(&led1);
+    ret = led_initialize(&led2);
+    ret = led_initialize(&led3);
 }
